@@ -1,15 +1,27 @@
 sources:
-  - code.R
+  - 1_fetch/src/get_nwis_data.R
+
+packages:
+  - dataRetrieval
+  - dplyr
+  - ggplot2
 
 targets:
   all:
     depends: figure_1.png
 
-  model_RMSEs.csv:
-    command: download_data(target_name)
+  all_site_data:
+    command: download_nwis_data(fileout = target_name, sites_file = '1_fetch/in/nwis_sites.txt')
 
-  processed:
-    command: process_data("model_RMSEs.csv")
+  site_data_long:
+    command: process_data(all_site_data)
+
+  site_data_annotated:
+    command: annotate_data(site_data_long)
+
+
+  site_data_styled:
+    command: style_data(site_data_long)	
 
   figure_1.png:
-    command: myplot(target_name, processed)
+    command: plot_nwis_timeseries(target_name, site_data_styled)
