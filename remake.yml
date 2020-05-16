@@ -1,0 +1,15 @@
+sources:
+  - code.R
+
+targets:
+  all:
+    depends: figure_1.png
+
+  model_RMSEs.csv:
+    command: download_data(target_name)
+
+  processed:
+    command: process_data("model_RMSEs.csv")
+
+  figure_1.png:
+    command: myplot(target_name, processed)
