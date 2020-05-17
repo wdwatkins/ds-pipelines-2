@@ -18,14 +18,14 @@ targets:
   site_data:
     command: download_nwis_data()
   
-  site_info:
-    command: nwis_site_info(site_data)
+  1_fetch/out/site_info.csv:
+    command: nwis_site_info(target_name, site_data)
 
   site_data_clean:
     command: process_data(site_data)
 
   site_data_annotated:
-    command: annotate_data(site_data_clean, site_info = site_info)
+    command: annotate_data(site_data_clean, site_filename = '1_fetch/out/site_info.csv')
 
   site_data_styled:
     command: style_data(site_data_annotated)	
