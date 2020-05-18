@@ -31,4 +31,4 @@ targets:
     command: style_data(site_data_annotated)	
 
   3_visualize/out/figure_1.png:
-    command: plot_nwis_timeseries(target_name, site_data_styled)
+    command: plot_nwis_timeseries(target_name, site_data_styled, width = 12, height = 7, units = I('in'))
