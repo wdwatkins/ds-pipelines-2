@@ -19,7 +19,7 @@ targets:
     command: download_nwis_data()
   
   1_fetch/out/site_info.csv:
-    command: nwis_site_info(target_name, site_data)
+    command: nwis_site_info(fileout = '1_fetch/out/site_info.csv', site_data)
 
   site_data_clean:
     command: process_data(site_data)
@@ -31,4 +31,5 @@ targets:
     command: style_data(site_data_annotated)	
 
   3_visualize/out/figure_1.png:
-    command: plot_nwis_timeseries(target_name, site_data_styled, width = 12, height = 7, units = I('in'))
+    command: plot_nwis_timeseries(fileout = '3_visualize/out/figure_1.png', 
+      site_data_styled)  
