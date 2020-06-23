@@ -1,6 +1,6 @@
 process_data <- function(nwis_data){
   nwis_data_clean <- rename(nwis_data, water_temperature = X_00010_00000) %>% 
-    select(-agency_cd, -X_00010_00000_cd, tz_cd)
+    select(-agency_cd, -X_00010_00000_cd, -tz_cd)
   
   return(nwis_data_clean)
 }
