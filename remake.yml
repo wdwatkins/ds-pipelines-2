@@ -15,26 +15,36 @@ targets:
   all:
     depends: 3_visualize/out/figure_1.png
 
+  fetch_date: 
+    command: c(I('2020-07-01'))
+
   1_fetch/out/site_data/01427207.csv:
     command: download_nwis_site_data(target_name)
+    depends: fetch_date
   1_fetch/out/site_data/01432160.csv:
     command: download_nwis_site_data(target_name)
+    depends: fetch_date
   1_fetch/out/site_data/01435000.csv:
     command: download_nwis_site_data(target_name)
+    depends: fetch_date
   1_fetch/out/site_data/01436690.csv:
     command: download_nwis_site_data(target_name)
+    depends: fetch_date
   1_fetch/out/site_data/01466500.csv:
     command: download_nwis_site_data(target_name)
+    depends: fetch_date
     
   all_site_files:
-    command: hash_dir_files(directory = I('1_fetch/out/site_data'), dummy = I('2020-07-01'))
-    depends:
-      - 1_fetch/out/site_data/01466500.csv
-      - 1_fetch/out/site_data/01436690.csv
-      - 1_fetch/out/site_data/01435000.csv
-      - 1_fetch/out/site_data/01432160.csv
-      - 1_fetch/out/site_data/01427207.csv
+    command: hash_dir_files('1_fetch/out/site_data/01466500.csv',
+       '1_fetch/out/site_data/01436690.csv',
+       '1_fetch/out/site_data/01435000.csv',
+       '1_fetch/out/site_data/01432160.csv',
+       '1_fetch/out/site_data/01427207.csv')
 
+  1_fetch/out/site_info.csv:	    
+    command: nwis_site_info(fileout = target_name, 
+       site_hash_table = all_site_files)
+    
   site_data_processed:
     command: process_data(all_site_files, site_filename = '1_fetch/out/site_info.csv')
 

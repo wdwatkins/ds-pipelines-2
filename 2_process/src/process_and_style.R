@@ -11,8 +11,7 @@ process_data <- function(all_site_files, site_filename) {
   return(nwis_data_processed)
 }
 
-hash_dir_files <- function(directory, dummy) {
-  files <- list.files(path = directory, full.names = TRUE, pattern = ".csv")
-  hash_vec <- tools::md5sum(files)
+hash_dir_files <- function(...) {
+  hash_vec <- tools::md5sum(c(...))
   data.frame(filepath = names(hash_vec), hash = hash_vec)
 }
