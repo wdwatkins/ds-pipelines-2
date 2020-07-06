@@ -1,8 +1,9 @@
 nwis_site_info <- function(fileout, site_hash_table){
-  site_no <- site_hash_table$filepath %>% basename() %>% 
+  site_no <- readRDS(site_hash_table) %>%
+    pull(filepath) %>% basename() %>% 
     stringr::str_extract(pattern = "(?:[0-9]+)")
   site_info <- dataRetrieval::readNWISsite(site_no)
-  write_csv(site_info, fileout)
+  return(site_info)
 }
 
 
