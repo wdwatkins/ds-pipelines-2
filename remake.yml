@@ -34,7 +34,7 @@ targets:
     command: download_nwis_site_data(target_name)
     depends: fetch_date
     
-  1_fetch/out/all_site_files.rds:
+  1_fetch/out/all_site_files.yml:
     command: combine_to_ind(ind_file = target_name,
        '1_fetch/out/site_data/01466500.csv',
        '1_fetch/out/site_data/01436690.csv',
@@ -43,7 +43,7 @@ targets:
        '1_fetch/out/site_data/01427207.csv')
 
   site_info:	    
-    command: nwis_site_info(site_hash_table = '1_fetch/out/all_site_files.rds')
+    command: nwis_site_info(site_hash_table = '1_fetch/out/all_site_files.yml')
     
   2_process/out/site_data_processed.rds:
     command: process_data(file_out = target_name,
