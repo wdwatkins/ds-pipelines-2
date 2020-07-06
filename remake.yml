@@ -35,7 +35,7 @@ targets:
     depends: fetch_date
     
   1_fetch/out/all_site_files.rds:
-    command: hash_dir_files(out_file = target_name,
+    command: combine_to_ind(ind_file = target_name,
        '1_fetch/out/site_data/01466500.csv',
        '1_fetch/out/site_data/01436690.csv',
        '1_fetch/out/site_data/01435000.csv',

@@ -9,9 +9,3 @@ process_data <- function(file_out, all_site_files, site_info) {
     mutate(station_name = as.factor(station_name))
   saveRDS(nwis_data_processed, file = file_out)
 }
-
-hash_dir_files <- function(out_file, ...) {
-  hash_vec <- tools::md5sum(c(...))
-  hash_df <- data.frame(filepath = names(hash_vec), hash = hash_vec)
-  saveRDS(hash_df, file = out_file)
-}
